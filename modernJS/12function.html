@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        var add = function thisFunctionNameWillIgnored(x,y) {  
+            return x+y;
+        }
+
+        console.log(add);
+        console.dir(add);
+
+    //Hoisting
+        console.log(add(1,2));
+        //console.log(x(1,2));
+
+        //함수 선언문
+        function add(a,b){
+            return a+b;
+        }
+        //함수 선언문: 함수 호이스팅에 의해 호출가능
+        
+        //함수 표현식
+        var x = function(a,b){
+            return a+b;
+        }
+
+        //함수 표현식: 런타임 이전에var키워드를 사용한 번수는 
+        //undefined로 초기화되기 때문에 표현식 이전에 사용할 수 없음.
+        //(함수의 호이스팅)
+
+    //즉시실행 함수(IIFE)
+        var res = (function (a){
+            console.log("hello");
+            return a;
+          }(3));
+          console.log(res)
+
+
+
+    //순수함수와 비순수함수
+        var x = 1;
+        function sunsu(a){
+            return ++a;
+        }
+
+        function notSunsu(){
+            x++;
+        }
+        //순수함수는 함수 내부에서 부수 효과가 나타나지 않는다.
+        x = sunsu(1);
+        //비순수 함수는 인수를 받지 않았지만 , 외부 상태를 직접 참조해
+        //부수효과가 일어난다.
+        notSunsu();
+
+
+        //힘수형 프로그래밍에서는 순수함수와 보조 함수를 이용해
+        //프로그래밍 하는 것이 목적이다.
+
+    //모듈패턴 - 정보은닉
+        var Counter = (function(){
+            var num = 0; //private 변수
+            return{
+                increase(){
+                    return ++num;
+                }
+            }
+        }());
+
+        console.log(Counter.num);
+        console.log(Counter.increase());
+        yasd=2;
+    </script>
+</body>
+</html>

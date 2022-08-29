@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const base = {
+            name: "lee",
+
+            //ES6 메서드방식
+            sayHi(){
+               return this.name;
+            },
+            //ES5 방식
+            bar : function(){
+                console.log("bar");
+            }
+
+        } 
+        //ES6메서드에는 생성자가 없다.(문법적 오류 최소화)
+        //new base.sayHi();
+        new base.bar();
+
+        const derived = {
+            __proto__ : base,
+            //name: "derived",
+            //ES6 메서드만 super키워드를 사용할 수 있다.
+            sayHi(){
+                return `${super.sayHi()}`;
+            }
+        }
+
+        console.log(derived.sayHi()); //foo
+
+
+
+        /*화살표함수*/
+
+        const arrow = (x,y) => x*y;
+        console.log(arrow(2,3));//6
+
+        //중괄호없이 표현식이 아닌 문이면에러가 발생
+        //const arrow2 = () => const x = 1;
+
+        //한줄로 객체리터럴 반환시 소괄호로 감싼다.
+        //그외에는 다음과 같이 반환한다.
+        const arrow3 = (a,b) => {
+            return {a,b};
+        }
+
+        console.log(arrow3(2,3));//{a:2,b:3}
+
+        //map시 편함
+        const val = [1,2,3].map(v => v*2);
+        console.log(val);//[2,4,6]
+
+        //화살표 함수는 prototype이 없다.
+
+        //화살표함수의 this 바인딩
+        class Prefixer{
+            constructor(prefix){
+                this.prefix = prefix;
+            }
+            //화살표함수의 this는 내부의 this바인딩을 갖지 않아 함수가 정의된 위치에 의해 결정된다.
+            //화살표함수는 상위 스코프의 this를 가르킨다.
+            add(arr){
+                return arr.map(item => this.prefix + item);
+            }
+        }
+        
+
+        const prefixer = new Prefixer('-webkit-');
+        console.log(prefixer.add(['transition', 'user-select']))
+
+        const counter = {
+            num : 1,
+            increase:  function(){return ++this.num},
+            increase2: ()=> ++this.num //window
+        };
+
+        console.log(counter.increase());
+
+
+        class Person{
+            constructor(){
+                this.name = "lee";
+                this.sayHi = () => console.log(`Hi ${this.name}`);
+            }
+        }
+
+        const person = new Person();
+        person.sayHi();
+
+
+        //rest 파라미터
+        function foo(param, ...rest){
+            console.log(param);
+            console.log(rest);
+        }
+
+        foo(1,2,3,4);
+
+        //매개변수 기본값
+
+        function sum(x,y){
+            x = x || 0;
+            y = y || 0;
+
+            return x+y;
+        }
+
+        console.log(sum(1,2));
+        console.log(sum(1));
+        console.log(sum(null));
+
+    </script>
+</body>
+</html>

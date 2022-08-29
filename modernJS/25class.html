@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //기존의 방식
+        var Person = (function(){
+            this.name = "new thing";
+            function Person (name) { 
+               this.name = name;
+            }
+            
+            Person.sayHello = function(){
+                console.log(name);
+            }
+
+            Person.prototype.sayHello = function(){
+                console.log(this.name);
+            }
+            return Person;
+        }());
+
+        var x = new Person("a");
+        x.sayHello();
+        Person.sayHello();
+
+        //class 방식
+        class Person2{
+            #name = "lee"; //클래스 필드, private 필드
+            constructor(name){
+                this.#name = name; //인스턴스 프로퍼티
+            }
+ 
+            sayHello(){
+                console.log(this.#name);
+            }
+
+            static sayHello(){
+                console.log(name);
+            }
+        }
+        var y = new Person2("b");
+        y.sayHello();
+        Person2.sayHello();
+ 
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Animal{
+            constructor(age, weight){
+                this.age = age;
+                this.weight = weight;
+            }
+            eat(){return "eat"}
+            move(){return "move"}
+
+        }
+
+        class Bird extends Animal{
+            constructor(age, weight, name){
+                super(age, weight);
+                this.name = name;
+            }
+            fly(){return "fly"}
+            all(){
+                console.log(this.age+''+ this.name);
+                
+            }
+        }
+
+        let bird = new Bird(1,5,"bird");
+        console.log(bird.eat());
+        bird.all()
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Date
+        //기본적으로 현재 시간을 출력한다.
+        console.log(new Date());
+        //생성자함수에 숫자타입의 밀리초를 전달하면 1970년 기점으로 
+        //밀리세컨만큼 경과한 날짜와 시간을 반환한다.
+        console.log(new Date(86400000));
+        
+        //파라미터로 dateString을 전달할 수도 있다.
+        console.log(new Date('2020/03/26 10:00:00'));
+        
+        //new Date(y,m[,d,h,m,s,mi])
+        console.log(new Date(2020,2,26,10,00,00,0));
+
+        //Date.now는 1970년을 기점으로 현재까지 경과한 밀리초를 반환한다.
+        console.log(Date.now());
+        //Date.parse는 인수로 전달된 지정시간을 밀리초호 변환한다.
+        console.log(Date.parse('Jan 2, 1970 00:00:00 UTC'))//86400000
+        console.log(Date.parse('Jan 2, 1970 00:00:00'))//54000000
+        console.log(Date.parse('1970/01/01/09:00:01'))//1000
+
+        //get/set FullYear/Month/Date(일)/Day(월~일)/Hours/Minutes/Seconds
+        console.log(new Date().getDate())
+
+        //toDateString/toTimeString
+        const today = new Date('2020/07/24/12:30');
+        console.log(today.toString());//Fri Jul 24 2020 12:30:00 GMT+0900 (한국 표준시)
+        console.log(today.toDateString());//Fri Jul 24 2020
+        console.log(today.toTimeString());//12:30:00 GMT+0900 (한국 표준시)
+        
+        //toLocaleString/toLocaleTimeString(브라우저가 동작중인 시스템의 로캘)
+        console.log(today.toLocaleString());//2020. 7. 24. 오후 12:30:00
+        console.log(today.toLocaleString('ko-KR'));//2020. 7. 24. 오후 12:30:00
+        console.log(today.toLocaleString('en-US'));//7/24/2020, 12:30:00 PM
+
+
+        console.log(today.getDay());//5
+
+
+
+
+
+
+    </script>
+</body>
+</html>

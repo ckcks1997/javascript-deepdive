@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Circle(radius){
+            this.radius = radius;
+        }
+        Circle.prototype.getArea = function(){
+            return Math.PI * this.radius **2;
+        };
+
+        let c1 = new Circle(2);
+        console.log(c1.getArea())
+        console.log('radius' in c1)
+        //
+        //for..in문
+        function Example1 (param) { 
+            this.name = param.name;
+            this.age = param.age;
+            
+         }
+
+        let e1 = new Example1({name: 'hello', age:32});
+        for (const key in e1) {
+            console.log(`${key}: ${e1[key]}`)
+        }
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let x= 1;
+        function outer(){
+            let x = 10;
+            function increase() { 
+                //debugger;
+                x++;
+                console.log(x); 
+            };
+            return increase;
+        }
+
+        const increase = outer();
+        const increase2 = outer();
+        increase();
+        increase();
+        increase2();
+        increase2();
+
+        const increase3 = (function(){
+            let num = 0;
+            return function(){
+                return ++num;
+            }
+        }());
+        console.log(increase3());
+        console.log(increase3());
+
+
+ 
+
+        const Person = (function(){
+            var _sth = "something";
+            debugger;
+            function Person(name, age){
+                this.name = name;
+                this.age = age;
+            }
+
+            Person.prototype.sayHi = function(){
+                console.log(this.name+" "+this.age);
+            }
+
+            Person.prototype.setSth = function (param) {  
+                _sth = param;
+            }
+
+            Person.prototype.getSth = function () {  
+                console.log(this)
+                return _sth;
+            }
+            
+            return Person;
+        }());
+
+        const me = new Person('lee', 20);
+        const me2 = new Person('lee2', 10);
+        me2.sayHi();
+        me.sayHi();
+        console.log(me.age);
+        console.log(Person._sth);//undefined
+        console.log(me._sth);//undefined
+        console.log(me.getSth());//undefined
+        console.log(Person)
+
+
+    </script>
+</body>
+</html>

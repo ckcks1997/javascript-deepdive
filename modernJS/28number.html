@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log(Number.EPSILON);
+        //2진법 변환시 무한소수가 되어 오차가 발생한다.
+        const a = 0.2+0.1 === 0.3
+        console.log(a);//false
+        
+        //지수표기법:e뒤에 있는 숫자에 10n승을 곱한다.
+        console.log((0.001).toExponential());
+
+        //toFixed: 소수점의 위치에서 반올림한다.
+        //0(기본값)이면 소수점을 반올림한다.
+        console.log((12345.678).toFixed())//12346
+        console.log((12345.678).toFixed(2))//12345.68
+
+        //toString: 생략...
+
+        
+
+    </script>
+</body>
+</html>

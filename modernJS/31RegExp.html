@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const target = 'Is this all there is?';
+        //패턴: is
+        //플래그: i => 대소문자 구분없이 검색
+            //es5
+        //const regexp = /is/i;
+            //es6
+        const regexp = new RegExp(/is/i);
+        regexp.test(target); //true
+
+        //RegExp.prototype.exec
+        //매칭결과를ㄹ 배열로 반환, 없으면 null
+        const reg2 = /is/;
+        console.log(reg2.exec(target));//['is', index: 5, input: 'Is this all there is?', groups: undefined]
+
+        //test: boolean값으로 결과 변환
+        //match:String에 regexp를 표현
+        target.match(reg2);
+
+        /*
+            플래그
+            i: ignore case
+            g: global, 대상문자열내 패턴과 일치하는 모든 문자열 검색
+            m: multiline, 문자열의 행이 바뀌더라도 패턴검색을 계속함
+        */
+
+        console.log(target.match(/is/))//['is', index: 5, input: 'Is this all there is?', groups: undefined]
+        console.log(target.match(/is/i))//['is', index: 0, input: 'Is this all there is?', groups: undefined]
+        console.log(target.match(/is/g))//['is', 'is']
+        console.log(target.match(/is/ig))//['Is', 'is', 'is']
+        
+        /*
+        패턴: 앞에서 본 바와 같이 패턴은 /로 열고 닫는다.
+        임의의 문자열 검색: .은 임의의 문자 한개를 의미한다.
+        */
+       
+        console.log(target.match(/..is/g))//['this', 'e is']
+
+        /*반복검색: {m,n}은 앞선 패턴이 최소m번, 최대 n번 반복되는 문자열이다. */
+
+        const target2 = 'A AA b AS AAaA aaas AaAA';
+        console.log(target2.match(/A{2}/gi))// ['AA', 'AA', 'AA', 'AA']
+        console.log(target2.match(/A{2,}/gi))// ['AA', 'AAaA', 'aaa', 'AaAA']
+
+        //?는 물음표앞 한 char의{0,1}과 같다.
+        const target3 = "color colour motor";
+        console.log(target3.match(/colou?r/g))//['color', 'colour']
+        
+        //or검색 |, 분해되지 않은 단어 +
+        const target4 = "A AA B BB Aa Bb 1 123"
+        console.log(target4.match(/A|B/g));// ['A', 'A', 'A', 'B', 'B', 'B', 'A', 'B']
+        console.log(target4.match(/A+|B+/g));// ['A', 'AA', 'B', 'BB', 'A', 'B']
+        
+        //위의 or를 []로 표현할수 있다.
+        console.log(target4.match(/[AB]+/g));// ['A', 'AA', 'B', 'BB', 'A', 'B']
+        
+        //범위지정은 -로 한다.
+        console.log(target4.match(/[A-Za-z0-9]+/g));// ['A', 'AA', 'B', 'BB', 'A', 'B', '1', '123']
+        
+        //위 예제를 간단히하면 \d는 숫자를 의미한다.[0-9]와 같다.
+        //\D는 문자를 의미하고 \w는 알파벳,숫자,언더스코어를 의미한다.[A-Za-z0-9_]
+        //\W는 \w와 반대로 동작한다.[^A-Za-z0-9_]
+        console.log(target4.match(/[\d]+/g));// ['1', '123']
+        console.log(target4.match(/[\w]+/g));// ['A', 'AA', 'B', 'BB', 'Aa', 'Bb', '1', '123']
+        console.log(target4.match(/[\W]+/g));// [' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        
+        //^는 not의 의미지만 []밖에서는 문자열의 시작을 의미한다.
+        console.log(target4.match(/[^\d ]+/g));//  ['A', 'AA', 'B', 'BB', 'Aa', 'Bb']
+
+        const target5 = 'https://naver.com';
+        console.log(target5.match(/^https/g));//['https'] 
+        const reg5  = /^http/;
+        console.log(reg5.test(target5));//true
+
+        //$는 문자열의 마지막을 의미한다.
+        const reg6 =/com$/;
+        console.log(reg6.test(target5));//true
+
+
+        /*자주 사용되는 정규식*/
+        console.log(/^(http|https):\/\//.test(target5));//true
+
+        const filename = 'index.html';
+        console.log(/html$/.test(filename));//true
+
+            //아이디 형식 검사
+            //*는 0개이상 포함을 의미
+            const email = "mike.mike@mike.mike";
+            console.log(/^[A-Za-z]([0-9A-Za-z-_\.])*@[0-9A-Za-z]([0-9A-Za-z])*\.[A-Za-z]{2,4}$/.test(email))
+
+            //휴대폰번호 검사
+            const phone = "010-1234-1234";
+            const phone2 = "011-1234-1234";
+            console.log(/^010-[0-9]{4}-[0-9]{4}/.test(phone));//true
+            console.log(/^010-[0-9]{4}-[0-9]{4}/.test(phone2));//false
+
+            //특수문자 포함여부 검사
+            const t = "abcAAL1!23";
+            console.log((/[^A-Za-z0-9]/g).test(t))//true
+
+        //특수문자 제거 
+        console.log(t.replace(/[^A-Za-z0-9]/gi,'')); //abcAAL123
+
+    </script>
+</body>
+</html>

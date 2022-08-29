@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const person = new Object();
+        person.name = 'Lee';
+
+        //생성자 함수에 의한 객체 생성 방식
+        function Circle(radius){
+            console.log(this)
+            this.radius = radius;
+            this.getDiameter = function(){
+                return 2 * this.radius;
+            };
+        }
+
+        const circle = new Circle(2);
+        console.log(circle.getDiameter());
+
+        //new를 사용하지 않으면 this는 전역객체를 가르키게 됨.
+        const circle2 = Circle(10);
+        console.log(radius);
+        console.log(getDiameter());
+
+        //생성자 없이 호출되는 것을 방지하려면
+        //new.target을 이용한다.
+        function Circle2(radius){
+            console.log("arg:",arguments)
+            console.log(this)
+            if(new.target){
+                this.radius = radius;
+                this.getDiameter = function(){
+                    return 2 * this.radius;
+                };
+            }else{
+                console.log("new 연산자로 생성 후 호출하세요")
+            }
+        }
+
+        const circle21 = Circle2(5);
+        const circle22 = new Circle2(5);
+        console.log(circle22.getDiameter())
+
+        //매개변수의 길이를 확인하지 않는 js의 특성을 이용해 다음과 같은 함수도 작성이 가능하다.
+        function sum() { 
+            let res = 0;
+            for(var i=0; i< arguments.length; i++){
+                res += arguments[i];
+            }
+
+            return res;
+         }
+
+         console.log("--가변인자함수")
+         console.log(sum());
+         console.log(sum(1,10));
+         console.log(sum(1,2,3));
+
+    </script>
+</body>
+</html>

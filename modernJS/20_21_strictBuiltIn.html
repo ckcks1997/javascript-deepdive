@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //'use strict';
+        function foo(){
+            x = 10; //err
+        }
+        
+        foo();
+
+        let fun1 = function(a){
+            console.log(a);
+        }
+
+        var x = eval('(function(){return 1;})');
+        console.log(x());
+
+        //URL과 URI: URL은 쿼리스트링이 빠진구조, URI는 완전한 구조
+        //URI주소내 한글등이 있다면 이스케이프 처리를 위해 변환해야한다.
+        const uri = "http://한글example.com?name=제습";
+        const enc = encodeURI(uri);
+        const enc2 = encodeURIComponent(uri);
+        console.log(enc);
+        console.log(enc2);
+        console.log(decodeURI(enc));
+    </script>
+</body>
+</html>

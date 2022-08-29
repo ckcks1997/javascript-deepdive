@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        let str = "str한글♥ 🛒😀🎈🎇adasdfeihrstr🎍😁😮😣😏🙄😶😑😐😙😙😆🥼🎨🎨🖼🦺🕶🕶🎪🎢🤣👕🧶🧵🧵";
+        console.log(Object.getOwnPropertyDescriptors(str))
+
+        //indexOf: 특정 문자열의 존재유무 확인
+        console.log(str.indexOf("🛒") != -1);
+        //es6:includes
+        console.log(str.includes("🛒"));
+ 
+        //search, includes, startsWith
+        console.log("--search, includes")
+        console.log(str.search(/t/));
+
+        console.log(str.includes('str'));
+        console.log(str.includes('str', 5));//5번째 인덱스부터 탐색
+
+        console.log(str.startsWith('str'));
+        console.log(str.startsWith('str',5));
+        
+        console.log(str.endsWith('str',5));
+
+        //charAt(idx), substring(start,end)
+        console.log(str.substring(1,4));
+        console.log(str.substring(50));
+        console.log(str.substring(0, str.indexOf(' ')));
+
+        //slice
+        const str2 = 'helloWorld';
+            //아래 2개는 결과가 같다.
+        str2.substring(0,5);
+        str2.slice(0,5);
+            //slice는 -인덱스가 가능하다.
+        console.log(str2.substring(-2)); //hello world
+        console.log(str2.slice(-2)); //ld
+
+        //toUpperCase/toLowerCase/trim(생략)
+
+        //repeat(es6), 음수불가, 소수점은 버림
+        const str3 = 'abc';
+        console.log(str3.repeat(2)); //abcabc
+
+        //replace
+        console.log(str2.replace('hello', 'oh'));//oh world
+        console.log(str2.replace(/HEllO/gi, 'hi'));//hi world
+        console.log(str2.replace(/.[A-Z]/g, match =>{
+            console.log(match);
+            return match[0]+'_'+match[1].toLowerCase();
+        }));//hi world
+
+        //split
+        const str4 = 'How are you doing?';
+        console.log(str4.split(' ')); //['How', 'are', 'you', 'doing?']
+        console.log(str4.split(/\s/));//['How', 'are', 'you', 'doing?']
+        console.log(str4.split(''));//['H', 'o', 'w', ' ', 'a', 'r', 'e', ' ', 'y', 'o', 'u', ' ', 'd', 'o', 'i', 'n', 'g', '?']
+        
+        //응용
+        console.log(str4.split(' ').reverse().join(' ')); //doing? you are How
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
