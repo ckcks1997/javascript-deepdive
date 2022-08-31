@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .red{
+            color:red;
+        }
+        .blue{
+            color: rgb(110,110,230);
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="somein">
+
+    <ul>
+        <li id="apple">a</li>
+        <li id="banana">b</li>
+        <li id="orange">o</li>
+    </ul>
+
+    <ul id="fruits">
+        <li class="fruit apple">apple</li>
+        <li class="fruit banana">banana</li>
+        <li class="fruit orange">orange</li>
+    </ul>
+
+    <ul id="colors">
+        <li class="red">a</li>
+        <li class="red">b</li>
+        <li class="red">c</li>
+    </ul>
+    <script>
+        //id값은 암묵적으로 id값과 동일한 이릉의 전역변수가 생성된다.
+        console.log(somein); //<input type="text" id="somein">
+        setTimeout(function () { console.log(somein.value) },5000);
+
+        //태그 이름을 이용한 요소 노드 취득
+        const elem = document.getElementsByTagName('li');
+        console.log(elem); // HTMLCollection(3)
+        [...elem].forEach(e => {
+            e.className="orange";
+        });
+
+        //class를  이용한 요소노드 취득
+        const elem2 = document.getElementsByClassName('fruit');
+        [...elem2].forEach(e => {e.style.color='rgb(245,110,110)'})
+
+        //특정노드의 자손노드 탐색
+        const fruits = document.querySelector('#fruits');
+        const banana = fruits.querySelector('.banana');
+        console.log(banana);
+
+        //css 선택자를 이용할수 있다.
+        const bananaNext = document.querySelector(".banana ~ li");
+        console.log(bananaNext);
+
+        //참고로 querySelector-를 쓰는것은 css선택자문법을 사용할 수 있지만 getElements~
+        //방식보다 느리다.
+
+        //주의할점
+        //getElements-가 반환하는 HTMLCollection은 살아있는 객체이기 때문에
+        // 다음과 같은 경우를 조심해야 한다.
+        let changeColor = document.getElementsByClassName("orange");
+        for(let i=0; i<changeColor.length; i++){
+            changeColor[i].className = 'blue';
+            console.log(changeColor)
+        } // 알록달록...
+
+        //인덱스를 역으로 돌거나(i--) while문 사용하는 방법이 있지만
+        //HTMLCollection을 사용하지 않고 고차함수(map,filer등)을 사용하는 방법도 있다.
+        [...changeColor].forEach(e => e.className = 'blue')
+
+
+
+        //NodeList//
+        //HTMLCollection의 부작용을 줄이기 위해 QuerySelector-를 쓰는 방법이 있다.
+        //QS는 NodeList를 반환한다. 이때 NodeList는 실시간으로 노드 객체의 상태변경을
+        //반영하지 않는 객체다.
+
+        changeColor = document.querySelectorAll(".blue");
+        //forEach는 NodeList.prototype.foreach메서드를 상속받아 사용할 수 있다.
+        changeColor.forEach(e => e.className = "red")
+
+        const {childNodes: fruitsNode, firstChild} = fruits;
+        console.log(fruitsNode)
+        for(var i=0; i<fruitsNode.length;i++){
+            fruits.removeChild(fruitsNode[i]);
+        } 
+
+        console.log(fruitsNode)
+        
+    </script>
+</body>
+</html>

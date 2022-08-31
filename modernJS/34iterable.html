@@ -8,7 +8,7 @@
 </head>
 <body>
     <script>
-        const arr = [1,2,3];
+        let arr = [1,2,3];
         const it = arr[Symbol.iterator]();
         console.log('next' in it);
         console.log(it.next());
@@ -16,10 +16,16 @@
         console.log(it.next());
         console.log(it.next());
 
+        //for..of는 이터러블, for..in은 객체
         for (const it1 of it) {
             console.log(it1)
         }
         console.log([...arr]);
+
+        var max = Math.max(...arr);
+        arr = arr.concat([4,5]);
+        console.log(arr);
+
     </script>
 </body>
 </html>

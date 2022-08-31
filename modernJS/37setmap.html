@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //set: 중복허용x, 인덱스 없음
+        const set1 = new Set([1,2,3,3]);
+        console.log(set1);//1,2,3
+        console.log(set1.size);
+        set1.add(4);
+        console.log(set1);//1,2,3,4
+        
+        set1.add(() => {});//함수추가도 됨
+        console.log(set1)
+
+        //JS weired parts
+        console.log(NaN === NaN)//false
+        console.log(0 === -0)//true
+        
+        //요소 순회
+        //첫번째요소: 현재 순회중인 요소값
+        //두번째요소: 현재 순회중인 요소값
+        //세번째요소: 현재 순회중인 set객체 자체
+        console.log('요소순회==');
+        set1.forEach((v1,v2,set) => console.log(v1,v2,set));
+
+        //set은 이터러블 하다.
+        console.log(Symbol.iterator in set1); //true 
+
+        console.log("=====")
+        for(const value of set1){
+            console.log(value);
+        }
+
+        //스프레드 문법의 대상이 될 수 있다.
+        console.log([...set1]);
+
+
+        //Map
+        const map = new Map([['key1', 'value1'], ['key2', 'value2']]);
+        console.log(map);
+        console.log(map.size);//2
+        
+        map.set('key3', 'val3');//추가
+        console.log(map);
+
+        //map.clear();//전부 삭제
+
+        //map 순회: (요소값,요소키,Map객체 자체) 
+        console.log(map)
+        map.forEach((v,k,map)=> console.log(v,k,map))
+
+        console.log(Symbol.iterator in map);//true
+        for(const e of map){
+            console.log(e);
+        }
+
+        for(const e of map.keys()){
+            console.log(e);
+        }
+
+        for(const e of map.values()){
+            console.log(e);
+        }
+
+
+        var x = "hello world";
+        x= x.split(" ");
+        console.log(x.length)
+
+
+    </script>
+</body>
+</html>

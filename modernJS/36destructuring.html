@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //디스트럭처링: 객체의 구조를 파괴하여 1개이상의 변수에 개별적으로 할당하는 것
+        const arr = [1,2,3];
+        //es5
+        var one1 = arr[0];
+        var two1 = arr[1];
+        var three1 = arr[2];
+        //es6
+        const [one, two, three] = arr;
+        console.log(one,two,three);
+
+        //우변에는 값을 꼭 할당해야하며 []안에 값을 넣어야 한다.
+        const [x,y] = [1,2];
+
+        //url파싱후 객체를 생성하는 함수
+        function parseURL(url = ''){
+            const parsedURL = url.match(/^(\w+):\/\/([^/]+)\/(.*)$/);
+            if(!parsedURL) return{};
+            console.log(parsedURL)
+            const [, protocol, host, path] = parsedURL;
+            return {protocol, host, path};
+        }
+
+        const parsedURL = parseURL("http://dev.a.org/ko/docs");
+        console.log(parsedURL)
+        
+        //객체 디스트럭쳐링
+        const user = {
+            firstName: 'hello',
+            lastName: 'world'
+        };
+
+        const {firstName, lastName} = user; 
+        console.log(firstName, lastName);
+
+
+
+    </script>
+</body>
+</html>
