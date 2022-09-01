@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.0/purify.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="foo">hello <span>world!</span></div>
+
+    <ul id="fruits">
+        <li id="ide" class="apple">apple</li>
+    </ul>
+    <!-- <p><img src="x" onerror="alert('hello')"></p> -->
+    <!-- <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" > -->
+     <script>
+        //innerHTML: 요소 노드의 콘텐츠 영역내에 포함된 모든 html마크업을 문자열로 반환
+        console.log(document.getElementById("foo").innerHTML);//hello <span>world!</span>
+        console.log(document.getElementById("foo").innerHTML = "no hi");
+
+        const fruits = document.getElementById('fruits');
+        //노드 추가
+        fruits.innerHTML += '<li class="banana"> Banana</li>';
+        //교체
+        fruits.innerHTML = '<li class="banana"> Banana</li>';
+        
+        //innerHTML 프로퍼티에 할당하는 것은 크로스 사이트 스크립팅 공격에 취약하다.
+        let content = `<img src="x" onerror="alert('hello')">`; 
+        //fruits.innerHTML = content;
+         
+        //추천라이브러리: DOMPurify
+        content = DOMPurify.sanitize(content);  
+       // fruits.innerHTML = content;
+
+        //insertAdjacentHTML
+        const $foo = document.getElementById('fruits');
+        $foo.insertAdjacentHTML('beforebegin', 'beforebegin');
+        $foo.insertAdjacentHTML('afterbegin', 'afterbegin');
+        $foo.insertAdjacentHTML('beforeend', 'beforeend');
+        $foo.insertAdjacentHTML('afterend', 'afterend');
+
+
+        //노드 생성과 추가
+        const $fruits = document.getElementById('fruits');
+        //1.요소노드 생성
+        const $li = document.createElement('li');
+        //2.택스트 노드 생성
+        const textNode = document.createTextNode('banana');
+        //3.텍스트노드를 $li요소 노드의 자식노드로 추가
+        $li.appendChild(textNode);
+        //4. $li요소 노드를 #fruits 노드의 마지막 자식 노드로 추가
+        $fruits.appendChild($li);
+
+        //복수노드 생성과 추가
+        ['apple', 'pineapple', 'kiwi'].forEach(t => {
+            const $li = document.createElement('li');
+            const textNode = document.createTextNode(t);
+            $li.appendChild(textNode);
+            $fruits.appendChild($li);
+        })
+
+        //하지만 위 방식은 리플로우와 리페인트를 여러번 작동시킨다.
+        //이를 해결하기 위해 DocumentFragment가 나왔다.
+        const $frag = document.createDocumentFragment();
+        ['peach', 'strawberry'].forEach(t => {
+            const $li = document.createElement('li');
+            const textNode = document.createTextNode(t);
+            $li.appendChild(textNode);
+            $frag.appendChild($li);
+        });
+        //지정한위치에 노드삽입
+        $fruits.insertBefore($frag, $fruits.lastElementChild); //마지막 자식요소 앞
+        
+        
+        //노드이동
+            //이미 존재하는 요소노드 취득
+        const [,$banana,] = $fruits.children;
+        fruits.appendChild($banana); //두번째에 있던 바나나를 마지막으로 옮겼다.
+
+       
+
+
+
+        
+
+
+    </script>
+</body>
+</html>

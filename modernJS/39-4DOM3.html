@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <ul id="fruits">
+        <li id="apple">Apple</li>
+    </ul>
+
+    <script>
+        //노드복사
+        const $fruits = document.getElementById('fruits');
+        const $apple = $fruits.firstElementChild;
+        //얕은 복사를 하여 사본생성, 텍스트가 없는 사본이 생성된다.
+        //얕은복사는 자손노드를 복사하지않으므로 텍스트 노드도 없다.
+        const $shallowClone = $apple.cloneNode();
+        $shallowClone.textContent = "banana";
+        $fruits.appendChild($shallowClone);
+
+        //fruits 요소를 깊은복사하여 모든 자손노드가 포함된 사본을 생성
+        const $deepclone = $fruits.cloneNode(true);
+        $fruits.appendChild($deepclone);
+
+
+        //노드 교체
+        const $newChild = document.createElement('li');
+        $newChild.textContent = 'banana1';
+
+        $fruits.replaceChild($newChild, $fruits.firstElementChild);
+
+        //노드 삭제
+        $fruits.removeChild($fruits.lastElementChild);
+
+        //선택자 요소 수정..?
+        const a = document.querySelector("#fruits").firstElementChild ;
+        a.textContent = 'asd';
+        console.log(a)
+
+    </script>
+</body>
+</html>

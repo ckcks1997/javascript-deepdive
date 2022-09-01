@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="color:red">hello world</div>
+
+    <div class="box red">hello</div>
+    <script>
+
+        //인라인 스타일 조작
+        const $div = document.querySelector('div');
+        $div.style.backgroundColor = 'blue';
+        //css스타일의 케밥케이스를 사용하려면 대괄호 문법을 쓴다.
+        $div.style['background-color'] = 'yellow';
+
+
+        //className vs classList
+        //className은 String, classList는 list를 반환한다.
+        const $box = document.querySelector('div.box'); 
+        console.log($box.className); 
+        console.log($box.classList); 
+
+        //DOMTokenList객체는 다음과 같은 메서드를 제공한다.
+        //add(...className)
+        $box.classList.add('foo','bar');
+        //remove
+        $box.classList.remove('blue', 'box');
+        //item(idx)
+        console.log($box.classList.item(0)); //red
+        //contains(name)
+        console.log($box.classList.contains('red')); //true
+        //replace
+        $box.classList.replace('bar', 'box2');
+        //toggle(classname[,force])
+        $box.classList.toggle('box2');//box2사라짐
+        $box.classList.toggle('box2');//box2 생김
+        //force값은 true이면 추가, flase이면 제거를 의미한다.
+        $box.classList.toggle('box2', true);//box2 생김
+
+        /*
+        참고
+
+        Function               | Live? | Type           | Time Complexity
+        querySelector          |       | Element        |  O(n)
+        querySelectorAll       |   N   | NodeList       |  O(n)
+        getElementById         |       | Element        |  O(1)
+        getElementsByClassName |   Y   | HTMLCollection |  O(1)
+        getElementsByTagName   |   Y   | HTMLCollection |  O(1)
+        getElementsByName      |   Y   | NodeList       |  O(1)
+        */
+        //연습
+        const $box2 = document.getElementsByClassName('box2'); 
+        console.log($box2.item(0).classList)
+
+
+        //getComputedStyle
+        console.log(window.getComputedStyle($div).backgroundColor)
+
+    </script>
+</body>
+</html>

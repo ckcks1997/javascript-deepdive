@@ -9,16 +9,29 @@
 <body>
 
     <ul id="fruits">
-        <li class = "apple">apple</li>
+        <li id = "apple">apple</li>
         <li class = "banana">banana</li>
         <li class = "orange">orange</li>
     </ul>
     <script>
+
         const fruits = document.getElementById('fruits');
+        const apple = document.getElementById("apple");
         console.log(fruits.childNodes)
         console.log(fruits.children)
         console.log(fruits.firstChild)
         console.log(fruits.lastChild)
+
+        console.log(fruits.firstChild.nodeType)
+        console.log(fruits.firstChild.nodeName)
+        console.log(fruits.firstElementChild)
+        
+        const textNode = apple.firstChild;
+        console.log(textNode.nodeValue)
+        console.log(textNode.textContent)
+
+
+
     </script>
 </body>
 </html>
