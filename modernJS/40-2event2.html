@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text">
+    <input type="checkbox" name="" id="">
+    <button>clickme</button>
+    <em class="message">off</em>
+
+    <script>
+        const input = document.querySelector('input[type=text]');
+        const checkbox = document.querySelector('input[type=checkbox]');
+        const button = document.querySelector('button');
+        const msg = document.querySelector('.message');
+        //load 이벤트가 발생하면 event 타입의 이벤트 객체가 생성된다.
+        window.onload = console.log;
+        //change "
+        // window.onchange = console.log;
+        // window.onfocus = console.log;
+        // window.onkeyup = console.log;
+        // window.onclick = console.log;
+        
+        //체크박스 요소변경 확인
+        checkbox.onchange = e => {
+            console.log(Object.getPrototypeOf(e) === Event.prototype); //true
+            msg.textContent = e.target.checked ? 'on':'off';
+        }
+
+
+    </script>
+</body>
+</html>
