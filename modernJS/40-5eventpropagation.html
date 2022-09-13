@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="fruits">
+        <li id="apple">apple</li>
+        <li id="banana">banana</li>
+        <li id="orange">orange</li> 
+    </ul>
+
+    <div><em class="msg">apple</em></div>
+
+    <script>
+        const fruits = document.getElementById('fruits');
+        const msg = document.querySelector('.msg');
+        // fruits.addEventListener('click', e => {
+        //     console.log(e.eventPhase);
+        //     console.log(e.target);
+        //     console.log(e.currentTarget);
+        // });
+        // fruits.addEventListener('click', e => {
+        //     console.log(e.eventPhase);
+        //     console.log(e.target);
+        //     console.log(e.currentTarget);
+        // }, true) ;
+
+        //구조분해할당, 매개변수 내 target 값 반환
+        function activate({target}){
+            console.log(target)
+            if(!target.matches('#fruits > li')) return;
+            [...fruits.children].forEach(fruit => {
+                fruit.classList.toggle('activate', fruit === target);
+                msg.textContent = target.id;
+            })
+        };
+        fruits.onclick = activate;
+    </script>
+</body>
+</html>
