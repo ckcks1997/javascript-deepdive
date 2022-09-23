@@ -9,11 +9,73 @@
 <body>
     
     <button onclick="handleClick(this)">click</button>
+
+    <button class="btn1">0</button>
+    <button class="btn2">0</button>
+    <button class="btn3">0</button>
+
     <script>
         function handleClick(btn){
             console.log(btn);//인수로 전달된 this는 이벤트를 바인딩한 dom요소를 가르킨다.
             console.log(this);//함수내의 this는 window를 가르킨다.
         }
+
+        const button1 = document.querySelector('.btn1');
+        const button2 = document.querySelector('.btn2');
+
+        //이벤트 핸들러 방식
+        button1.onclick = function (e) { 
+            console.log(this);//button1
+            console.log(e.currentTarget); //button1
+            console.log(this === e.currentTarget)//true
+         }
+
+         //addEventListener 방식
+        button2.addEventListener('click', function(e){
+            console.log(this);//button2
+            console.log(e.currentTarget); //button2
+            console.log(this === e.currentTarget)//true
+
+            ++this.textContent;
+        });
+
+        //arrow function
+        button1.onclick = (e)=>{ 
+            //화살표 함수 내 this는 상위 스코프의 this를 가르킨다.
+            console.log(this);//window
+            console.log(e.currentTarget); //button1
+            console.log(this === e.currentTarget)//false
+         }
+
+         button2.addEventListener('click',  (e)=>{
+            console.log(this);//window
+            console.log(e.currentTarget); //button2
+            console.log(this === e.currentTarget)//false
+            //this는 window를 가르키므로 window.textContent에 NaN을 할당한다.
+            ++this.textContent;
+        });
+
+
+
+        //this 주의점
+        //클래스 이벤트 핸들러를 바인딩할 경우 주의점: 아래는 이벤트 핸들러 방식을 사용하나 addEventListener
+        //방식을 사용하는 경우와 동일하다.
+
+        class App{
+            constructor(){
+                this.button = document.querySelector('.btn3');
+                this.count = 0;
+                this.button.onclick = this.increase.bind(this); //바인딩을 해줘야 한다.
+            }
+
+            increase(){
+                this.button.textContent = ++this.count;  
+ 
+            }
+        }
+        new App();
+
+        
     </script>
 </body>
 </html>

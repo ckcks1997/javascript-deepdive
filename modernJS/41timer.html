@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        //setTimeout
+        const timerId = setTimeout(() => console.log("hi"),1000);
+        clearTimeout(timerId); //취소, 호출되지 않음
+
+        //setInterval
+        let count = 1;
+        const timeoutId = setInterval(()=> {
+            console.log(count);
+            if(count ++ === 5) clearInterval(timeoutId);
+        }, 1000);
+
+    </script>
+</body>
+</html>
